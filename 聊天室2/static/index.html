@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#eef2ef" />
+    <title>局域网聊天室</title>
+    <link rel="stylesheet" href="/static/style.css?v=1.0.1" />
+  </head>
+  <body>
+    <section class="login-view" id="login-view">
+      <main class="login-panel">
+        <div class="brand-lockup">
+          <span class="brand-mark" aria-hidden="true">邻</span>
+          <div>
+            <p class="brand-name">局域网聊天室</p>
+            <p class="brand-note">同一个网络，直接开始聊天</p>
+          </div>
+        </div>
+
+        <div class="login-copy">
+          <h1>输入昵称，进入聊天室</h1>
+          <p>不需要注册账号。进入后，你会看到当前在线的其他用户。</p>
+        </div>
+
+        <form id="login-form" class="login-form">
+          <label for="nickname-input">你的昵称</label>
+          <input
+            id="nickname-input"
+            name="nickname"
+            type="text"
+            minlength="1"
+            maxlength="20"
+            autocomplete="nickname"
+            placeholder="例如：小明"
+            required
+          />
+          <button id="login-button" type="submit">进入聊天室</button>
+          <p class="form-status" id="login-status" aria-live="polite"></p>
+        </form>
+      </main>
+    </section>
+
+    <div class="app-shell" id="app-view" hidden>
+      <aside class="sidebar">
+        <header class="identity-bar">
+          <div class="identity-text">
+            <span>当前用户</span>
+            <strong id="my-nickname"></strong>
+          </div>
+          <button class="quiet-button" id="logout-button" type="button">
+            退出
+          </button>
+        </header>
+
+        <div class="connection-state" id="connection-state" data-state="connecting">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="connection-text">正在连接</span>
+        </div>
+
+        <section class="people-section">
+          <div class="section-heading">
+            <h2>在线用户</h2>
+            <span id="online-count">0</span>
+          </div>
+          <div class="people-list" id="online-list"></div>
+        </section>
+
+        <section class="people-section recent-section">
+          <div class="section-heading">
+            <h2>最近会话</h2>
+          </div>
+          <div class="people-list" id="conversation-list"></div>
+        </section>
+      </aside>
+
+      <main class="chat-panel">
+        <section class="empty-conversation" id="empty-conversation">
+          <div class="empty-sign" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <h2>选择一位聊天对象</h2>
+          <p>从左侧的在线用户或最近会话中点击一个名字。</p>
+        </section>
+
+        <section class="conversation-view" id="conversation-view" hidden>
+          <header class="chat-header">
+            <button class="back-button" id="mobile-back" type="button">
+              返回
+            </button>
+            <div>
+              <h2 id="peer-nickname"></h2>
+              <p id="peer-status"></p>
+            </div>
+          </header>
+
+          <div
+            class="message-list"
+            id="message-list"
+            role="log"
+            aria-live="polite"
+          ></div>
+
+          <form class="message-form" id="message-form">
+            <label class="sr-only" for="message-input">消息内容</label>
+            <textarea
+              id="message-input"
+              maxlength="1000"
+              rows="2"
+              placeholder="输入消息，Enter 发送，Shift + Enter 换行"
+            ></textarea>
+            <button id="send-button" type="submit">发送</button>
+          </form>
+          <p class="send-error" id="send-error" aria-live="polite"></p>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/app.js?v=1.0.1"></script>
+  </body>
+</html>
